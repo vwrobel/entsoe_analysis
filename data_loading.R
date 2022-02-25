@@ -13,6 +13,8 @@ loading_period <- lubridate::days(10)
 
 # Load generation
 
+map_codes <- "GB"
+
 for (map_code in map_codes){
 
   print("starting generation data load for country %s" %>% sprintf(map_code))

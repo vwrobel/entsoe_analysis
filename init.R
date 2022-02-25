@@ -20,7 +20,17 @@ collections <- collection_names %>%
 
 country_codes <- en_eic() %>%
   filter(AreaTypeCode == "CTY") %>%
-  dplyr::arrange(AreaName)
+  dplyr::select(- AreaTypeCode) %>%
+  dplyr::arrange(AreaName) %>%
+  # Correction for erroneous GB code
+  dplyr::filter(MapCode != "GB") %>%
+  dplyr::bind_rows(
+    tibble::tibble(
+      AreaCode = "10YGB----------A",
+      AreaName = "United Kingdom",
+      MapCode = "GB"
+    )
+  )
 
 en_codes <- en_generation_codes() %>%
   dplyr::select(codes, meaning)
@@ -32,3 +42,4 @@ map_codes <- country_codes$MapCode
 ren_technologies <- c("Wind Offshore", "Wind Onshore", "Solar")
 
 rds_dir <- "rds"
+graphs_dir <- "graphs"
