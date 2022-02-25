@@ -1,0 +1,9 @@
+rds
+renv
+graphs
+.RData
+.Renviron
+.Rhistory
+.Rprofile
+.Rproj.user/
+*.Rproj
